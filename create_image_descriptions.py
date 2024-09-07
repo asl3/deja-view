@@ -51,6 +51,7 @@ def get_decriptions_for_images(image_paths):
 
 
 if __name__ == "__main__":
+      # Generates this JSON structure with key as image path and value as the description of the image
       # {'/Users/sourabhmadur/Downloads/temp.jpeg': 
       # ' The image depicts a white, well-lit room with a minimalist interior design. 
       # There is a single, large window on the left side of the room, which allows natural light to flood into the space. 
