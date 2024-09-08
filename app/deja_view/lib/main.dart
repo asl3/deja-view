@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +15,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
         textTheme: TextTheme(
-          bodyMedium: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(
+              color: Colors.black87), // Updated text color for better contrast
         ),
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
@@ -38,7 +41,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent, // Set to transparent to see the gradient
+          backgroundColor:
+              Colors.transparent, // Transparent to show the gradient
           elevation: 0,
         ),
       ),
@@ -54,26 +58,30 @@ class ImageSearchScreen extends StatefulWidget {
 
 class _ImageSearchScreenState extends State<ImageSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  List<String> searchResults = []; // This will hold paths or URLs to matched images
+  List<String> searchResults = [];
   bool isButtonActive = true;
 
-  // Placeholder function for invoking the Python script
   Future<void> runPythonScript() async {
-    // Here you would call your Python script to process images
-    print("Running Python script for annotation...");
+    print("Running Python script for search...");
+    final response = await http.post(
+      Uri.parse('http://your-backend-url:5000/run-script'),
+    );
+
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+      print('Script Output: ${result['output']}');
+    } else {
+      print('Failed to run script');
+    }
   }
 
-  // Placeholder function for searching images in the vector database
   Future<void> performSearch(String query) async {
-    // Implement the vector database search logic here
-    // For now, we just print the query
     print("Performing search for: $query");
-
-    // Mockup: assume we have search results
+    await runPythonScript();
     setState(() {
       searchResults = [
-        'https://via.placeholder.com/150', // Replace with actual image URLs
-        'https://via.placeholder.com/150', // Replace with actual image URLs
+        'assets/cat1.jpeg',
+        'assets/cat2.jpeg',
       ];
     });
   }
@@ -81,7 +89,7 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // Extend the body behind the app bar to apply gradient
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
           'DejaView',
@@ -91,7 +99,10 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color.fromARGB(255, 85, 168, 235), Color.fromARGB(255, 98, 17, 212)],
+              colors: [
+                Color(0xFF74B9FF), // Light blue
+                Color(0xFFA29BFE), // Soft lavender
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -101,7 +112,10 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [const Color.fromARGB(255, 195, 225, 250)!, Color.fromARGB(255, 186, 90, 224)!],
+            colors: [
+              Color(0xFFE4F1FE), // Very light blue
+              Color(0xFFD3CCE3), // Light lavender/gray
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -115,9 +129,10 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
               ElevatedButton(
                 onPressed: isButtonActive
                     ? () async {
-                        await runPythonScript();
+                        // await runPythonScript();
                         setState(() {
-                          isButtonActive = true; // Disable the button after clicking
+                          isButtonActive =
+                              false; // Disable the button after clicking
                         });
                       }
                     : null,
@@ -130,7 +145,10 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
                 child: Ink(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [Color.fromARGB(255, 211, 18, 185), Colors.lightBlue],
+                      colors: [
+                        Color(0xFF6A82FB), // Light purple
+                        Color(0xFFFC5C7D), // Light pink
+                      ],
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -139,7 +157,8 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
                     alignment: Alignment.center,
                     child: Text(
                       'Upload my images',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -158,7 +177,7 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
                   ),
                 ),
                 onSubmitted: (query) {
-                  performSearch(query);
+                  print("Upload images");
                 },
               ),
               SizedBox(height: 20),
@@ -167,7 +186,8 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
                     ? Center(
                         child: Text(
                           'No images found. Please search with a different query.',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                              color: Colors.black87), // Better readability
                         ),
                       )
                     : GridView.builder(
@@ -184,7 +204,7 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
                             ),
                             clipBehavior: Clip.antiAlias,
                             elevation: 2,
-                            child: Image.network(
+                            child: Image.asset(
                               searchResults[index],
                               fit: BoxFit.cover,
                             ),
@@ -199,4 +219,3 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
     );
   }
 }
-
