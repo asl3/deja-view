@@ -33,7 +33,11 @@ def load_embeddings(json_file='data/images_with_embeddings.json'):
         return {}
 
 def get_top_k_similar(query_prompt, k, json_file='data/images_with_embeddings.json'):
-    query_embedding = inference_text.create_embedding(query_prompt)["data"][0]['embedding'][0]
+    query_embedding_li = np.array(inference_text.create_embedding(query_prompt)["data"][0]['embedding'])
+    array = np.array(query_embedding_li)
+
+    query_embedding = np.mean(array, axis=0).tolist()
+
     print("len of query embedding : ", len(query_embedding))
     embeddings = load_embeddings(json_file)
     
@@ -48,7 +52,9 @@ def get_top_k_similar(query_prompt, k, json_file='data/images_with_embeddings.js
     # Calculate cosine similarity
     for key in keys:
         sim = cosine_similarity([query_embedding], [embeddings[key]])[0][0]
+        print(embeddings[key][:5])
         scores.append((key, sim))
+    print(scores)
     
     # Sort scores in descending order
     scores.sort(key=lambda x: x[1], reverse=True)
@@ -71,14 +77,6 @@ def get_similar_images(user_prompt):
     return(results)
 
 
-# This function runs when the app starts
-# def startup_code():
-    
-# # Register the startup code to run when the app starts
-# @app.before_first_request
-# def before_first_request():
-#     startup_code()
-
 @app.route('/')
 def index():
     return jsonify(message="Hello, World!")
@@ -86,8 +84,7 @@ def index():
 @app.route('/search', methods=['GET'])
 def search():
     return get_similar_images("asdff")
-    filepath = get_similar_images(request.args.get('prompt'))
-    return jsonify(filepath=filepath)
+   
 
 if __name__ == '__main__':
     app.run(debug=True)

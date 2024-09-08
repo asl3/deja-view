@@ -1,5 +1,6 @@
 from nexa.gguf import NexaVLMInference
 from nexa.gguf import NexaTextInference
+import numpy as np
 import json
 
 IMAGES_DIR = "data/images"
@@ -69,7 +70,15 @@ def get_decriptions_and_embeddings_for_images(image_paths):
 	for image_path in image_paths:
 		
 		description = get_image_description(image_path)
-		d[image_path] = inference_text.create_embedding(description)["data"][0]['embedding'][0]
+		
+		embedding_result = inference_text.create_embedding(description)
+		
+		
+		array = np.array(embedding_result["data"][0]['embedding'])
+		average = np.mean(array, axis=0)
+
+
+		d[image_path] = average.tolist()
 		
 	return d
 
