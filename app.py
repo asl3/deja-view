@@ -47,9 +47,11 @@ app = Flask(__name__)
 def get_similar_images(user_prompt):
     top_k = get_top_k_similar(user_prompt, k=5)
 
+    results = []
     for key, score in top_k:
         print(f"Path: {key}, Cosine Similarity: {score}")
-        return(key)
+        results.append(key)
+    return(results)
 
 
 # This function runs when the app starts
