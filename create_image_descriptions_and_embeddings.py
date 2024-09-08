@@ -1,7 +1,11 @@
 from nexa.gguf import NexaVLMInference
 from nexa.gguf import NexaTextInference
+import json
 
+IMAGES_DIR = "data/images"
+OUTPUT_FILE = "data/images_with_embeddings.json"
 
+import os
 def get_response_text_from_generator(generator):
 	response_text = ""
 	try:
@@ -61,14 +65,13 @@ def get_image_description(image_path):
 	return description
 
 def get_decriptions_and_embeddings_for_images(image_paths):
-	image_descriptions = {}
+	d = {}
 	for image_path in image_paths:
+		
 		description = get_image_description(image_path)
-		image_descriptions[image_path] = {}
-		image_descriptions[image_path]["description"] = description
-		image_descriptions[image_path]["embedding"] = inference_text.create_embedding(description)
-
-	return image_descriptions
+		d[image_path] = inference_text.create_embedding(description)["data"][0]['embedding'][0]
+		
+	return d
 
 
 if __name__ == "__main__":
@@ -78,4 +81,16 @@ if __name__ == "__main__":
 	  # There is a single, large window on the left side of the room, which allows natural light to flood into the space. 
 	  # The window is dressed with white curtains that are partially drawn back, allowing a view outside. The room itself is empty, with a plain white wall as the background. 
 	  # There are no decorative elements or furniture items visible in the room. The overall aesthetic of the room is simple and clean, with a focus on the natural light that enters through the window.'}
-	print(get_decriptions_and_embeddings_for_images(["data/images/cat1.jpeg"]))
+
+	files = os.listdir(IMAGES_DIR)
+	print("files ", files)
+	print(len(files))
+
+	
+	with open(OUTPUT_FILE, 'w') as f:
+		
+		d = get_decriptions_and_embeddings_for_images(files)
+			
+		json.dump(d, f, indent=4)  
+			
+
