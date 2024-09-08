@@ -78,4 +78,4 @@ if __name__ == "__main__":
 	  # There is a single, large window on the left side of the room, which allows natural light to flood into the space. 
 	  # The window is dressed with white curtains that are partially drawn back, allowing a view outside. The room itself is empty, with a plain white wall as the background. 
 	  # There are no decorative elements or furniture items visible in the room. The overall aesthetic of the room is simple and clean, with a focus on the natural light that enters through the window.'}
-	print(get_decriptions_for_images(["data/images/cat1.jpeg"]))
+	print(get_decriptions_and_embeddings_for_images(["data/images/cat1.jpeg"]))
