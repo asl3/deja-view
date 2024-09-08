@@ -1,5 +1,6 @@
 from nexa.gguf import NexaVLMInference
 from nexa.gguf import NexaTextInference
+from sentence_transformers import SentenceTransformer
 import numpy as np
 import json
 
@@ -7,6 +8,9 @@ IMAGES_DIR = "data/images"
 OUTPUT_FILE = "data/images_with_embeddings.json"
 
 import os
+model = SentenceTransformer("Mihaiii/Squirtle")
+
+
 def get_response_text_from_generator(generator):
 	response_text = ""
 	try:
@@ -71,14 +75,17 @@ def get_decriptions_and_embeddings_for_images(image_paths):
 		
 		description = get_image_description(image_path)
 		
-		embedding_result = inference_text.create_embedding(description)
-		
-		
-		array = np.array(embedding_result["data"][0]['embedding'])
-		average = np.mean(array, axis=0)
 
 
-		d[image_path] = average.tolist()
+		# embedding_result = inference_text.create_embedding(description)
+		
+		
+		# array = np.array(embedding_result["data"][0]['embedding'])
+		# average = np.mean(array, axis=0)
+
+
+		embedding = model.encode(description).tolist()
+		d[image_path] = embedding
 		
 	return d
 
