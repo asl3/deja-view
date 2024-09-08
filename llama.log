@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [1725759435] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1055][         clip_model_load] clip_model_load: loaded meta data with 19 key-value pairs and 377 tensors from /Users/sourabhmadur/.cache/nexa/hub/official/llava-v1.6-vicuna-7b/projector-q4_0.gguf
 [1725759435] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1065][         clip_model_load] clip_model_load: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
 [1725759435] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   0:                       general.architecture str              = clip
@@ -27,3 +28,37 @@
 [1725759435] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp:  164][             get_key_idx] key clip.vision.mm_patch_merge_type not found in file
 [1725759435] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp:  164][             get_key_idx] key clip.vision.image_crop_resolution not found in file
 [1725759435] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1490][         clip_model_load] clip_model_load: compute allocated memory: 32.89 MB
+=======
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1055][         clip_model_load] clip_model_load: loaded meta data with 19 key-value pairs and 377 tensors from /Users/sourabhmadur/.cache/nexa/hub/official/llava-v1.6-vicuna-7b/projector-q4_0.gguf
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1065][         clip_model_load] clip_model_load: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   0:                       general.architecture str              = clip
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   1:                      clip.has_text_encoder bool             = false
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   2:                    clip.has_vision_encoder bool             = true
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   3:                   clip.has_llava_projector bool             = true
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   4:                          general.file_type u32              = 1
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   5:                               general.name str              = openai/clip-vit-large-patch14-336
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   6:                        general.description str              = image encoder for LLaVA
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   7:                        clip.projector_type str              = mlp
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   8:                     clip.vision.image_size u32              = 336
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv   9:                     clip.vision.patch_size u32              = 14
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  10:               clip.vision.embedding_length u32              = 1024
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  11:            clip.vision.feed_forward_length u32              = 4096
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  12:                 clip.vision.projection_dim u32              = 768
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  13:           clip.vision.attention.head_count u32              = 16
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  14:   clip.vision.attention.layer_norm_epsilon f32              = 0.000010
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  15:                    clip.vision.block_count u32              = 23
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  16:                     clip.vision.image_mean arr[f32,3]       = [0.481455, 0.457828, 0.408211]
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  17:                      clip.vision.image_std arr[f32,3]       = [0.268630, 0.261303, 0.275777]
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1081][         clip_model_load] clip_model_load: - kv  18:                              clip.use_gelu bool             = false
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1090][         clip_model_load] clip_model_load: - type  f32:  235 tensors
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1090][         clip_model_load] clip_model_load: - type  f16:  142 tensors
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1137][         clip_model_load] clip_model_load: CLIP using Metal backend
+[1725754594] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1192][         clip_model_load] clip_model_load: params backend buffer size =  595.49 MB (377 tensors)
+[1725754595] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp:  164][             get_key_idx] key clip.vision.image_grid_pinpoints not found in file
+[1725754595] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp:  164][             get_key_idx] key clip.vision.mm_patch_merge_type not found in file
+[1725754595] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp:  164][             get_key_idx] key clip.vision.image_crop_resolution not found in file
+[1725754595] [/Users/runner/work/nexa-sdk/nexa-sdk/dependency/llama.cpp/examples/llava/clip.cpp: 1490][         clip_model_load] clip_model_load: compute allocated memory: 32.89 MB
+[1725754604] encode_image_with_clip: image embedding created: 576 tokens
+[1725754604] 
+encode_image_with_clip: image encoded in   359.23 ms by CLIP (    0.62 ms per image patch)
+>>>>>>> Stashed changes
