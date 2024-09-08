@@ -61,29 +61,64 @@ class _ImageSearchScreenState extends State<ImageSearchScreen> {
   List<String> searchResults = [];
   bool isLoading = false;
 
-  Future<void> runPythonScript() async {
+  Future<List<String>> runPythonScript(String query) async {
     print("Running Python script for search...");
-    final response = await http.post(
-      Uri.parse('http://localhost:8001/get-strings'),
+    final response = await http.get(
+      Uri.parse('http://127.0.0.1:5000/search?prompt=$query'),
     );
-
+    print(response);
     if (response.statusCode == 200) {
-      final result = jsonDecode(response.body);
-      print('Script Output: ${result['output']}');
+      // final result = jsonDecode(response.body);
+      // print(result);
+      // print(result);
+      // // Convert List<dynamic> to List<String>
+      // // List<String> updatedResult = result.map((item) => item.toString()).toList();
+
+      // // Prepend "assets/" to each element
+      // updatedResult = result.map((item) => 'assets/$item').toList();
+      // print(updatedResult.runtimeType);
+      // Parse the response body as a List<dynamic>
+      final List<dynamic> data = jsonDecode(response.body);
+
+      // Convert List<dynamic> to List<String>
+      List<String> result = data.map((item) => item.toString()).toList();
+
+      // Print the extracted list of strings
+      print(result);
+      return result;
+      // return updatedResult;
     } else {
       print('Failed to run script');
+      return [];
     }
   }
 
   Future<void> performSearch(String query) async {
     print("Performing search for: $query");
-    await runPythonScript();
+    final images = await runPythonScript(query);
+    print(images);
     setState(() {
-      searchResults = [
-        'assets/cat1.jpeg',
-        'assets/cat2.jpeg',
-      ];
+      // searchResults = [
+      //   'assets/cat1.jpeg',
+      //   'assets/cat2.jpeg',
+      //   'assets/cat3.jpeg',
+      //   'assets/dog1.jpeg',
+      //   'assets/dog2.jpeg',
+      //   'assets/hotdog1.jpeg',
+      //   'assets/hotdog2.jpeg',
+      //   'assets/hotdog3.jpeg',
+      //   'assets/hotdog4.jpeg',
+      //   'assets/justin1.jpeg',
+      //   'assets/justin2.jpeg',
+      //   'assets/justin3.jpeg',
+      //   'assets/justin4.jpeg',
+      //   'assets/justin5.jpeg',
+      //   'assets/justin6.jpeg',
+      //   'assets/justin7.jpeg',
+      // ];
+      searchResults = images;
     });
+    
   }
 
   void handleButtonClick() async {
