@@ -4,8 +4,22 @@ import json
 import numpy as np
 import os
 from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer
 import time
+
+model_path_text = "gemma-2b:q2_K"
+
+inference_text = NexaTextInference(
+model_path=model_path_text,
+local_path=None,
+stop_words=[],
+temperature=0.7,
+max_new_tokens=512,
+top_k=50,
+top_p=0.9,
+profiling=True,
+embedding=True
+)
+
 
 def load_embeddings(json_file='data/images_with_embeddings.json'):
     if os.path.exists(json_file):
@@ -18,7 +32,9 @@ def load_embeddings(json_file='data/images_with_embeddings.json'):
     else:
         return {}
 
-def get_top_k_similar(query_embedding, k, json_file='data/images_with_embeddings.json'):
+def get_top_k_similar(query_prompt, k, json_file='data/images_with_embeddings.json'):
+    query_embedding = inference_text.create_embedding(query_prompt)["data"][0]['embedding'][0]
+    print("len of query embedding : ", len(query_embedding))
     embeddings = load_embeddings(json_file)
     
     # Ensure query_embedding is a numpy array
@@ -49,31 +65,19 @@ def get_similar_images(user_prompt):
 
     results = []
     for key, score in top_k:
+        result.append(key)
         print(f"Path: {key}, Cosine Similarity: {score}")
         results.append(key)
     return(results)
 
 
 # This function runs when the app starts
-def startup_code():
-    model_path_text = "gemma-2b:q2_K"
-
-    inference_text = NexaTextInference(
-	model_path=model_path_text,
-	local_path=None,
-	stop_words=[],
-	temperature=0.7,
-	max_new_tokens=512,
-	top_k=50,
-	top_p=0.9,
-	profiling=True,
-	embedding=True
-    )
-
-# Register the startup code to run when the app starts
-@app.before_first_request
-def before_first_request():
-    startup_code()
+# def startup_code():
+    
+# # Register the startup code to run when the app starts
+# @app.before_first_request
+# def before_first_request():
+#     startup_code()
 
 @app.route('/')
 def index():
@@ -81,6 +85,7 @@ def index():
 
 @app.route('/search', methods=['GET'])
 def search():
+    return get_similar_images("asdff")
     filepath = get_similar_images(request.args.get('prompt'))
     return jsonify(filepath=filepath)
 

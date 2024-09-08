@@ -23,6 +23,7 @@ EMBEDDINGS_FILE = "image_description_embeddings.json"
 
 def get_similar_images(user_prompt):
 	"""returns a list of image file paths closest to the prompt"""
+	embedding = inference_text.create_embedding(description)
 	pass
 
 if __name__ == "__main__":
