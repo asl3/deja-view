@@ -1,5 +1,6 @@
 # DejaView
 1st Place at 2024 AGI House GenAI Goes Local Hackathon
+
 AI powered local semantic image search
 - Uses local images to ensure privacy
 - Uses local llama vision and language models to annotate images and search over images
